@@ -18,6 +18,12 @@
 		C93973E4171B313100380D31 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C93973E3171B313100380D31 /* Default-568h@2x.png */; };
 		C93973E7171B313100380D31 /* MTZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C93973E6171B313100380D31 /* MTZViewController.m */; };
 		C93973EA171B313100380D31 /* MTZViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93973E8171B313100380D31 /* MTZViewController.xib */; };
+		C93973F2171B326400380D31 /* MTZSlideToReveal.m in Sources */ = {isa = PBXBuildFile; fileRef = C93973F1171B326400380D31 /* MTZSlideToReveal.m */; };
+		C93973F5171C870C00380D31 /* Field.png in Resources */ = {isa = PBXBuildFile; fileRef = C93973F3171C870C00380D31 /* Field.png */; };
+		C93973F6171C870C00380D31 /* Field@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C93973F4171C870C00380D31 /* Field@2x.png */; };
+		C93973F9171C8E3E00380D31 /* Slider.png in Resources */ = {isa = PBXBuildFile; fileRef = C93973F7171C8E3E00380D31 /* Slider.png */; };
+		C93973FA171C8E3E00380D31 /* Slider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C93973F8171C8E3E00380D31 /* Slider@2x.png */; };
+		C9C0347B171E4481005A766B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9C0347A171E4481005A766B /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +43,13 @@
 		C93973E5171B313100380D31 /* MTZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTZViewController.h; sourceTree = "<group>"; };
 		C93973E6171B313100380D31 /* MTZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTZViewController.m; sourceTree = "<group>"; };
 		C93973E9171B313100380D31 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MTZViewController.xib; sourceTree = "<group>"; };
+		C93973F0171B326400380D31 /* MTZSlideToReveal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTZSlideToReveal.h; sourceTree = "<group>"; };
+		C93973F1171B326400380D31 /* MTZSlideToReveal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTZSlideToReveal.m; sourceTree = "<group>"; };
+		C93973F3171C870C00380D31 /* Field.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Field.png; sourceTree = "<group>"; };
+		C93973F4171C870C00380D31 /* Field@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Field@2x.png"; sourceTree = "<group>"; };
+		C93973F7171C8E3E00380D31 /* Slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider.png; sourceTree = "<group>"; };
+		C93973F8171C8E3E00380D31 /* Slider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slider@2x.png"; sourceTree = "<group>"; };
+		C9C0347A171E4481005A766B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +60,7 @@
 				C93973CE171B313100380D31 /* UIKit.framework in Frameworks */,
 				C93973D0171B313100380D31 /* Foundation.framework in Frameworks */,
 				C93973D2171B313100380D31 /* CoreGraphics.framework in Frameworks */,
+				C9C0347B171E4481005A766B /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +90,7 @@
 				C93973CD171B313100380D31 /* UIKit.framework */,
 				C93973CF171B313100380D31 /* Foundation.framework */,
 				C93973D1171B313100380D31 /* CoreGraphics.framework */,
+				C9C0347A171E4481005A766B /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -88,6 +103,12 @@
 				C93973E5171B313100380D31 /* MTZViewController.h */,
 				C93973E6171B313100380D31 /* MTZViewController.m */,
 				C93973E8171B313100380D31 /* MTZViewController.xib */,
+				C93973F0171B326400380D31 /* MTZSlideToReveal.h */,
+				C93973F1171B326400380D31 /* MTZSlideToReveal.m */,
+				C93973F3171C870C00380D31 /* Field.png */,
+				C93973F4171C870C00380D31 /* Field@2x.png */,
+				C93973F7171C8E3E00380D31 /* Slider.png */,
+				C93973F8171C8E3E00380D31 /* Slider@2x.png */,
 				C93973D4171B313100380D31 /* Supporting Files */,
 			);
 			path = "Slide to Reveal";
@@ -164,6 +185,10 @@
 				C93973E2171B313100380D31 /* Default@2x.png in Resources */,
 				C93973E4171B313100380D31 /* Default-568h@2x.png in Resources */,
 				C93973EA171B313100380D31 /* MTZViewController.xib in Resources */,
+				C93973F5171C870C00380D31 /* Field.png in Resources */,
+				C93973F6171C870C00380D31 /* Field@2x.png in Resources */,
+				C93973F9171C8E3E00380D31 /* Slider.png in Resources */,
+				C93973FA171C8E3E00380D31 /* Slider@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +202,7 @@
 				C93973DA171B313100380D31 /* main.m in Sources */,
 				C93973DE171B313100380D31 /* MTZAppDelegate.m in Sources */,
 				C93973E7171B313100380D31 /* MTZViewController.m in Sources */,
+				C93973F2171B326400380D31 /* MTZSlideToReveal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +325,7 @@
 				C93973EF171B313100380D31 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

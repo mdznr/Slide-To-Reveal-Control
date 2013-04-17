@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MTZSlideToReveal.h"
 
 @interface MTZViewController : UIViewController
+
+@property (strong, nonatomic) IBOutlet MTZSlideToReveal *reveal;
 
 @end

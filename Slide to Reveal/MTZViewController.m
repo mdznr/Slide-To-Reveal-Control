@@ -18,6 +18,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+	_reveal = [[MTZSlideToReveal alloc] initWithFrame:CGRectMake(20,162,280,49)];
+	[_reveal setWord:@"29bmOjgy9OKWeNkVgy!#KWeN"];
+	[self.view addSubview:_reveal];
 }
 
 - (void)didReceiveMemoryWarning
