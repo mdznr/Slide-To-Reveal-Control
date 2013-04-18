@@ -9,13 +9,20 @@
 #import "MTZSlideToReveal.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define SQUARED(X) X*X
+
+double squared(double x)
+{
+	return x*x;
+}
+
 @interface MTZSlideToReveal ()
 
 @property (strong, nonatomic) UIImageView *background;
 @property (strong, nonatomic) UIImageView *sliderView;
 @property (strong, nonatomic) UILabel *dotsLabel;
 @property (strong, nonatomic) UILabel *passwordLabel;
-@property (nonatomic) NSUInteger numChunks;
+@property (nonatomic) float numChunks;
 
 @end
 
@@ -204,8 +211,30 @@
 	[_sliderView setCenter:centre];
 	
 	CGFloat percent = MIN(MAX(((center.x - min) / (max - min)), 0), 1);
-	CGFloat moveLeft = percent * (_passwordLabel.bounds.size.width - self.bounds.size.width);
-	NSLog(@"moveLeft: %f", moveLeft);
+	NSLog(@"PERCENT: %f", percent);
+	CGFloat numberOfSpaces = _numChunks-1;
+	float p = percent;
+	double chunkSize = 1/numberOfSpaces;
+	p += chunkSize/2;
+	float rem = fmod((float)p, (float)1/numberOfSpaces);
+	float div = floor((float)p / (1/numberOfSpaces));
+	float x = squared(chunkSize/2) - squared(rem-(chunkSize/2));
+	p = sqrtf(x);
+	if ( rem <= chunkSize && rem > chunkSize/2 ) {
+		p = chunkSize - p;
+	}
+	p += div * chunkSize;
+	p -= chunkSize/2;
+	NSLog(@"Percent: %f", p);
+	
+	/*
+	(x-.5)^2 + (y-0)^2 = .5^2  // < .5
+							   // y = sqrt(SQUARED(1/2) - SQUARED(x-(1/2)))
+	(x-.5)^2 + (y-1)^2 = .5^2  // > .5
+							   // y = 1 - sqrt(SQUARED(1/2) - SQUARED(x-(1/2)))
+	 */
+	
+	CGFloat moveLeft = p * (_passwordLabel.bounds.size.width - self.bounds.size.width);
 	[_passwordLabel setTransform:CGAffineTransformMakeTranslation(-moveLeft, 0)];
 	
 	CGRect rect = CGRectMake(moveLeft + _sliderView.frame.origin.x + 6,
@@ -213,7 +242,6 @@
 							 _sliderView.frame.size.width - 12,
 							 _sliderView.frame.size.height - 34);
 	UIView *mask = [[UIView alloc] initWithFrame:rect];
-	NSLog(@"%f %f %f %f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
 	[mask setBackgroundColor:[UIColor blackColor]];
 	[_passwordLabel layer].mask = [mask layer]; // ***
 //	NSLog(@"%f %f %f %f", _sliderView.frame.origin.x, _sliderView.frame.origin.y, _sliderView.frame.size.width, _sliderView.frame.size.height);
