@@ -24,6 +24,8 @@
 		C93973F9171C8E3E00380D31 /* Slider.png in Resources */ = {isa = PBXBuildFile; fileRef = C93973F7171C8E3E00380D31 /* Slider.png */; };
 		C93973FA171C8E3E00380D31 /* Slider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C93973F8171C8E3E00380D31 /* Slider@2x.png */; };
 		C9C0347B171E4481005A766B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9C0347A171E4481005A766B /* QuartzCore.framework */; };
+		C9C0347D171F6E39005A766B /* SourceCodePro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9C0347C171F6E39005A766B /* SourceCodePro-Regular.ttf */; };
+		C9C0347F171F6ED4005A766B /* SourceCodePro-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9C0347E171F6ED4005A766B /* SourceCodePro-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		C93973F7171C8E3E00380D31 /* Slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider.png; sourceTree = "<group>"; };
 		C93973F8171C8E3E00380D31 /* Slider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slider@2x.png"; sourceTree = "<group>"; };
 		C9C0347A171E4481005A766B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C9C0347C171F6E39005A766B /* SourceCodePro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceCodePro-Regular.ttf"; sourceTree = "<group>"; };
+		C9C0347E171F6ED4005A766B /* SourceCodePro-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceCodePro-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,8 @@
 		C93973D4171B313100380D31 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C9C0347C171F6E39005A766B /* SourceCodePro-Regular.ttf */,
+				C9C0347E171F6ED4005A766B /* SourceCodePro-Medium.ttf */,
 				C93973D5171B313100380D31 /* Slide to Reveal-Info.plist */,
 				C93973D6171B313100380D31 /* InfoPlist.strings */,
 				C93973D9171B313100380D31 /* main.m */,
@@ -189,6 +195,8 @@
 				C93973F6171C870C00380D31 /* Field@2x.png in Resources */,
 				C93973F9171C8E3E00380D31 /* Slider.png in Resources */,
 				C93973FA171C8E3E00380D31 /* Slider@2x.png in Resources */,
+				C9C0347D171F6E39005A766B /* SourceCodePro-Regular.ttf in Resources */,
+				C9C0347F171F6ED4005A766B /* SourceCodePro-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

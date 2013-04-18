@@ -15,6 +15,7 @@
 @property (strong, nonatomic) UIImageView *sliderView;
 @property (strong, nonatomic) UILabel *dotsLabel;
 @property (strong, nonatomic) UILabel *passwordLabel;
+@property (nonatomic) NSUInteger numChunks;
 
 @end
 
@@ -70,16 +71,17 @@
 	[_dotsLabel setBackgroundColor:[UIColor clearColor]];
 	[self addSubview:_dotsLabel];
 	
-	CGRect rect = CGRectMake(0, 0, self.bounds.size.width, 40);
-	_passwordLabel = [[UILabel alloc] initWithFrame:rect];
-	[_passwordLabel setFont:[UIFont systemFontOfSize:30.0f]];
+	_passwordLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+	[_passwordLabel setFont:[UIFont fontWithName:@"SourceCodePro-Medium" size:24.0f]];
 	[_passwordLabel setTextAlignment:NSTextAlignmentCenter];
 	[_passwordLabel setNumberOfLines:1];
 	[_passwordLabel setBaselineAdjustment:UIBaselineAdjustmentAlignCenters];
 	[_passwordLabel setAdjustsLetterSpacingToFitWidth:YES];
 	[_passwordLabel setAdjustsFontSizeToFitWidth:YES];
 	[_passwordLabel setTextColor:[UIColor blackColor]];
-	[_passwordLabel setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Field"]]];
+//	UIImage *pattern = [[UIImage imageNamed:@"Field"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 7, 3, 7) resizingMode:UIImageResizingModeStretch];
+	[_passwordLabel setBackgroundColor:[UIColor colorWithRed:0.96f green:0.96f blue:0.96f alpha:1.0f]];
+#warning Change to gradient background
 	[_passwordLabel setAlpha:0.0f];
 	[self addSubview:_passwordLabel];
 	
@@ -97,9 +99,24 @@
 
 - (void)setWord:(NSString *)word
 {
-	_word = word;
+	NSString *newWord = @"";
+	_numChunks = 1;
+	for ( NSUInteger i=0; i<word.length; ++i ) {
+		if ( i>0 && i%4 == 0 ) {
+			newWord = [newWord stringByAppendingString:@" "];
+			_numChunks++;
+		}
+		newWord = [newWord stringByAppendingFormat:@"%c", [word characterAtIndex:i]];
+	}
 	
-	[_passwordLabel setText:word];
+	_word = newWord;
+	
+	[_passwordLabel setText:newWord];
+	[_passwordLabel sizeToFit];
+	[_passwordLabel setFrame:(CGRect){_passwordLabel.frame.origin.x,
+		                              _passwordLabel.frame.origin.y + 1,
+		                              _passwordLabel.frame.size.width + 20,
+		                              40}];
 	
 	NSString *lotsOfDots = [[NSString alloc] init];
 	for ( NSUInteger i = 0; i<word.length; ++i ) {
@@ -111,7 +128,7 @@
 - (void)didLongPress:(id)sender
 {
 	if ( [sender isKindOfClass:[UIGestureRecognizer class]] ) {
-		NSLog(@"%@", sender);
+//		NSLog(@"%@", sender);
 		switch ( [sender state] ) {
 			case UIGestureRecognizerStateBegan:
 				[self showPopover:sender];
@@ -132,7 +149,7 @@
 - (void)didPan:(id)sender
 {
 	if ( [sender isKindOfClass:[UIGestureRecognizer class]] ) {
-		NSLog(@"%@", sender);
+//		NSLog(@"%@", sender);
 		switch ( [sender state] ) {
 			case UIGestureRecognizerStateBegan:
 				[self showPopover:sender];
@@ -180,20 +197,26 @@
 
 - (void)setPopoverCenter:(CGPoint)center
 {
-	CGFloat min = _sliderView.frame.size.width/2;
-	CGFloat max = _background.frame.size.width - _sliderView.frame.size.width/2;
-	CGFloat y = 1 + _sliderView.frame.size.height/2;
+	CGFloat min = _sliderView.bounds.size.width/2;
+	CGFloat max = _background.bounds.size.width - _sliderView.bounds.size.width/2;
+	CGFloat y = 1 + _sliderView.bounds.size.height/2;
 	CGPoint centre = CGPointMake(MAX(MIN(center.x, max), min), y);
 	[_sliderView setCenter:centre];
 	
-	CGRect frame = CGRectMake(_sliderView.frame.origin.x + 7,
-							  _sliderView.frame.origin.y + 6,
-							  _sliderView.frame.size.width - 13,
-							  _sliderView.frame.size.height - 34);
-	UIView *mask = [[UIView alloc] initWithFrame:frame];
+	CGFloat percent = MIN(MAX(((center.x - min) / (max - min)), 0), 1);
+	CGFloat moveLeft = percent * (_passwordLabel.bounds.size.width - self.bounds.size.width);
+	NSLog(@"moveLeft: %f", moveLeft);
+	[_passwordLabel setTransform:CGAffineTransformMakeTranslation(-moveLeft, 0)];
+	
+	CGRect rect = CGRectMake(moveLeft + _sliderView.frame.origin.x + 6,
+							 _sliderView.frame.origin.y + 6,
+							 _sliderView.frame.size.width - 12,
+							 _sliderView.frame.size.height - 34);
+	UIView *mask = [[UIView alloc] initWithFrame:rect];
+	NSLog(@"%f %f %f %f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
 	[mask setBackgroundColor:[UIColor blackColor]];
-	[_passwordLabel layer].mask = [mask layer];
-	NSLog(@"%f %f %f %f", _sliderView.frame.origin.x, _sliderView.frame.origin.y, _sliderView.frame.size.width, _sliderView.frame.size.height);
+	[_passwordLabel layer].mask = [mask layer]; // ***
+//	NSLog(@"%f %f %f %f", _sliderView.frame.origin.x, _sliderView.frame.origin.y, _sliderView.frame.size.width, _sliderView.frame.size.height);
 	
 #warning when at edges, the shadow goes over the rounded corners
 #warning should go to edges? stick to chunks? Not even on left/right
