@@ -213,9 +213,9 @@ double squared(double x)
 	NSLog(@"PERCENT: %f", percent);
 	float p = percent;
 	
-#warning this should be a variable, not constant 4
-#warning maybe use multiplication (1.5x) of formWidth
-	if ( _numChunks > 4 ) {
+	NSLog(@"%f", _passwordLabel.frame.size.width);
+	NSLog(@"%f", self.frame.size.width);
+	if ( _passwordLabel.frame.size.width > self.frame.size.width * 1.25 ) {
 		double numberOfSpaces = MAX(_numChunks-1,1);
 		double x = p + 1/(2*numberOfSpaces);
 		double flx = floor(2 * numberOfSpaces * x);
