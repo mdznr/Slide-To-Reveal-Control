@@ -86,9 +86,8 @@ double squared(double x)
 	[_passwordLabel setAdjustsLetterSpacingToFitWidth:YES];
 	[_passwordLabel setAdjustsFontSizeToFitWidth:YES];
 	[_passwordLabel setTextColor:[UIColor blackColor]];
-//	UIImage *pattern = [[UIImage imageNamed:@"Field"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 7, 3, 7) resizingMode:UIImageResizingModeStretch];
-	[_passwordLabel setBackgroundColor:[UIColor colorWithRed:0.96f green:0.96f blue:0.96f alpha:1.0f]];
-#warning Change to gradient background
+	[_passwordLabel setBackgroundColor:[UIColor colorWithWhite:250.0f/255.0f alpha:1.0f]];
+#warning Change to gradient background?
 	[_passwordLabel setAlpha:0.0f];
 	[self addSubview:_passwordLabel];
 	
@@ -212,27 +211,20 @@ double squared(double x)
 	
 	CGFloat percent = MIN(MAX(((center.x - min) / (max - min)), 0), 1);
 	NSLog(@"PERCENT: %f", percent);
-	CGFloat numberOfSpaces = _numChunks-1;
 	float p = percent;
-	double chunkSize = 1/numberOfSpaces;
-	p += chunkSize/2;
-	float rem = fmod((float)p, (float)1/numberOfSpaces);
-	float div = floor((float)p / (1/numberOfSpaces));
-	float x = squared(chunkSize/2) - squared(rem-(chunkSize/2));
-	p = sqrtf(x);
-	if ( rem <= chunkSize && rem > chunkSize/2 ) {
-		p = chunkSize - p;
-	}
-	p += div * chunkSize;
-	p -= chunkSize/2;
-	NSLog(@"Percent: %f", p);
 	
-	/*
-	(x-.5)^2 + (y-0)^2 = .5^2  // < .5
-							   // y = sqrt(SQUARED(1/2) - SQUARED(x-(1/2)))
-	(x-.5)^2 + (y-1)^2 = .5^2  // > .5
-							   // y = 1 - sqrt(SQUARED(1/2) - SQUARED(x-(1/2)))
-	 */
+#warning this should be a variable, not constant 4
+#warning maybe use multiplication (1.5x) of formWidth
+	if ( _numChunks > 4 ) {
+		double numberOfSpaces = MAX(_numChunks-1,1);
+		double x = p + 1/(2*numberOfSpaces);
+		double flx = floor(2 * numberOfSpaces * x);
+		double flx1 = pow((double)-1, flx);
+		double a = (((2*numberOfSpaces*x) - (flx)) - ((flx1 + 1) / 2));
+		p = (flx1 * sqrt(1 - pow(a,2)) + (flx1 - 1)/(-2) + (flx))/(2*numberOfSpaces);
+		p -= (1/(2*numberOfSpaces));
+	}
+	NSLog(@"Percent: %f", p);
 	
 	CGFloat moveLeft = p * (_passwordLabel.bounds.size.width - self.bounds.size.width);
 	[_passwordLabel setTransform:CGAffineTransformMakeTranslation(-moveLeft, 0)];
@@ -243,11 +235,7 @@ double squared(double x)
 							 _sliderView.frame.size.height - 34);
 	UIView *mask = [[UIView alloc] initWithFrame:rect];
 	[mask setBackgroundColor:[UIColor blackColor]];
-	[_passwordLabel layer].mask = [mask layer]; // ***
-//	NSLog(@"%f %f %f %f", _sliderView.frame.origin.x, _sliderView.frame.origin.y, _sliderView.frame.size.width, _sliderView.frame.size.height);
-	
-#warning when at edges, the shadow goes over the rounded corners
-#warning should go to edges? stick to chunks? Not even on left/right
+	[_passwordLabel layer].mask = [mask layer];
 }
 
 /*

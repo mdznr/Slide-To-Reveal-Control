@@ -19,6 +19,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	_reveal = [[MTZSlideToReveal alloc] initWithFrame:CGRectMake(20,162,280,49)];
+	[_reveal setWord:@"29bmOjgy9OKW"]; // 12
 	[_reveal setWord:@"29bmOjgy9OKWeNkV"]; // 16
 	[_reveal setWord:@"29bmOjgy9OKWeNkVgy!#"]; // 20
 	[_reveal setWord:@"29bmOjgy9OKWeNkVgy!#KWeN"]; // 24
