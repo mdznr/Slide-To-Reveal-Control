@@ -19,15 +19,15 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	
-	UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[button setFrame:CGRectMake(20, 162, 280, 49)];
-	[button setTitle:@"Okay" forState:UIControlStateNormal];
-	[self.view addSubview:button];
+	_button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[_button setFrame:CGRectMake(20, 162, 280, 49)];
+	[_button setTitle:@"Okay" forState:UIControlStateNormal];
+	[self.view addSubview:_button];
 	
 	UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didGestureOnButton:)];
-	[button addGestureRecognizer:longPressGesture];
+	[_button addGestureRecognizer:longPressGesture];
 	UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didGestureOnButton:)];
-	[button addGestureRecognizer:panGesture];
+	[_button addGestureRecognizer:panGesture];
 	
 	_reveal = [[MTZSlideToReveal alloc] initWithFrame:CGRectMake(20,162,280,49)];
 	[_reveal setWord:@"29bmOjgy9OKW"]; // 12
@@ -44,12 +44,15 @@
 		switch ( [sender state] ) {
 			case UIGestureRecognizerStateBegan:
 				[_reveal setHidden:NO];
+				[_button setHidden:YES];
 				break;
 			case UIGestureRecognizerStateEnded:
 				[_reveal setHidden:YES];
+				[_button setHidden:NO];
 				break;
 			case UIGestureRecognizerStateChanged:
 				[_reveal setHidden:NO];
+				[_button setHidden:YES];
 				break;
 			default:
 				break;
