@@ -11,6 +11,6 @@
 
 @interface MTZViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet MTZSlideToReveal *reveal;
+@property (strong, nonatomic) MTZSlideToReveal *reveal;
 
 @end

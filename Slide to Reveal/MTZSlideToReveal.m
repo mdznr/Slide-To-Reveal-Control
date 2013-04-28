@@ -96,10 +96,10 @@ double squared(double x)
 	[_sliderView setAlpha:0.0f];
 	[self addSubview:_sliderView];
 	
-	UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPan:)];
+	UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didGesture:)];
 	[self addGestureRecognizer:pan];
 	
-	UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didLongPress:)];
+	UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didGesture:)];
 	[self addGestureRecognizer:longPress];
 }
 
@@ -131,7 +131,7 @@ double squared(double x)
 	[_dotsLabel setText:lotsOfDots];
 }
 
-- (void)didLongPress:(id)sender
+- (void)didGesture:(id)sender
 {
 	if ( [sender isKindOfClass:[UIGestureRecognizer class]] ) {
 //		NSLog(@"%@", sender);
@@ -139,26 +139,6 @@ double squared(double x)
 			case UIGestureRecognizerStateBegan:
 				[self showPopover:sender];
 				[self setPopoverCenter:[sender locationOfTouch:0 inView:self]];
-				break;
-			case UIGestureRecognizerStateEnded:
-				[self hidePopover:sender];
-				break;
-			case UIGestureRecognizerStateChanged:
-				[self setPopoverCenter:[sender locationOfTouch:0 inView:self]];
-				break;
-			default:
-				break;
-		}
-	}
-}
-
-- (void)didPan:(id)sender
-{
-	if ( [sender isKindOfClass:[UIGestureRecognizer class]] ) {
-//		NSLog(@"%@", sender);
-		switch ( [sender state] ) {
-			case UIGestureRecognizerStateBegan:
-				[self showPopover:sender];
 				break;
 			case UIGestureRecognizerStateEnded:
 				[self hidePopover:sender];
@@ -210,11 +190,11 @@ double squared(double x)
 	[_sliderView setCenter:centre];
 	
 	CGFloat percent = MIN(MAX(((center.x - min) / (max - min)), 0), 1);
-	NSLog(@"PERCENT: %f", percent);
+//	NSLog(@"PERCENT: %f", percent);
 	float p = percent;
 	
-	NSLog(@"%f", _passwordLabel.frame.size.width);
-	NSLog(@"%f", self.frame.size.width);
+//	NSLog(@"%f", _passwordLabel.frame.size.width);
+//	NSLog(@"%f", self.frame.size.width);
 	if ( _passwordLabel.frame.size.width > self.frame.size.width * 1.25 ) {
 		double numberOfSpaces = MAX(_numChunks-1,1);
 		double x = p + 1/(2*numberOfSpaces);
@@ -224,7 +204,7 @@ double squared(double x)
 		p = (flx1 * sqrt(1 - pow(a,2)) + (flx1 - 1)/(-2) + (flx))/(2*numberOfSpaces);
 		p -= (1/(2*numberOfSpaces));
 	}
-	NSLog(@"Percent: %f", p);
+//	NSLog(@"Percent: %f", p);
 	
 	CGFloat moveLeft = p * (_passwordLabel.bounds.size.width - self.bounds.size.width);
 	[_passwordLabel setTransform:CGAffineTransformMakeTranslation(-moveLeft, 0)];
@@ -237,14 +217,5 @@ double squared(double x)
 	[mask setBackgroundColor:[UIColor blackColor]];
 	[_passwordLabel layer].mask = [mask layer];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

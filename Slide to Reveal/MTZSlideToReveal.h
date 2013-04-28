@@ -12,4 +12,6 @@
 
 @property (nonatomic, assign) NSString *word;
 
+- (void)didGesture:(id)sender;
+
 @end
